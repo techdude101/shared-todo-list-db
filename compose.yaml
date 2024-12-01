@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password="$$(cat /run/secrets/db-password)" --silent']
+      interval: 10s
+      retries: 5
+      start_period: 30s
+    secrets:
+      - db-password
+    volumes:
+      - "./db_scripts/:/docker-entrypoint-initdb.d"
+    environment:
+      - MYSQL_DATABASE=db_todo
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 3306
+      - 33060
+    ports:
+      - 3306:3306
+secrets:
+  db-password:
+    file: db_password.txt

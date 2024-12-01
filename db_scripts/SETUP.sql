@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `db_todo`.`tbl_todo` (
   `todo_id` INT UNSIGNED NOT NULL,
   `data` VARCHAR(100) NULL,
   `completed` TINYINT NULL,
-  `completed_timestamp` TIMESTAMP NULL,
+  `completed_timestamp` INT UNSIGNED NULL,
   `tbl_user_id` INT NOT NULL,
   PRIMARY KEY (`id`, `tbl_user_id`),
   UNIQUE INDEX `idtable1_UNIQUE` (`id` ASC) VISIBLE,

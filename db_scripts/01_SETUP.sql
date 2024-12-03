@@ -25,8 +25,7 @@ CREATE TABLE IF NOT EXISTS `db_todo`.`tbl_todo` (
   `completed` TINYINT NULL,
   `completed_timestamp` INT UNSIGNED NULL,
   PRIMARY KEY (`id`, `user_id`),
-  UNIQUE INDEX `idtable1_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE)
+  UNIQUE INDEX `idtable1_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;

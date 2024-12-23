@@ -118,11 +118,11 @@
           <stringProp name="username">${db_username}</stringProp>
         </JDBCDataSource>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos">
           <stringProp name="dataSource">DB Pool</stringProp>
-          <stringProp name="query">CALL get_todos_for_user_id(?);</stringProp>
-          <stringProp name="queryArguments">${userId}</stringProp>
-          <stringProp name="queryArgumentsTypes">INTEGER</stringProp>
+          <stringProp name="query">CALL get_todos_for_user(?);</stringProp>
+          <stringProp name="queryArguments">${username}</stringProp>
+          <stringProp name="queryArgumentsTypes">VARCHAR</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -131,15 +131,16 @@
           <stringProp name="variableNames">todo_id,todo_text,completed,completed_timestamp</stringProp>
         </JDBCSampler>
         <hashTree>
-          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Thread Number to User ID" enabled="true">
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Thread Number to User ID">
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
-            <stringProp name="script">vars.put(&quot;userId&quot;, ${__threadNum} as String);</stringProp>
+            <stringProp name="script">def threadNumStr = ${__threadNum} as String
+vars.put(&quot;username&quot;, &quot;user-&quot; + threadNumStr);</stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223PreProcessor>
           <hashTree/>
-          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify No Results are Returned" enabled="true">
+          <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify No Results are Returned">
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
@@ -148,11 +149,11 @@
           </JSR223Assertion>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Add Todo" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Add Todo">
           <stringProp name="dataSource">DB Pool</stringProp>
-          <stringProp name="query">CALL add_todo_for_user_id(?, ?, ?, ?);</stringProp>
-          <stringProp name="queryArguments">${userId},${__threadNum},testing 123,0</stringProp>
-          <stringProp name="queryArgumentsTypes">INTEGER,INTEGER,VARCHAR,INTEGER</stringProp>
+          <stringProp name="query">CALL add_todo_for_user(?, ?, ?, ?);</stringProp>
+          <stringProp name="queryArguments">${username},${__threadNum},testing 123,0</stringProp>
+          <stringProp name="queryArgumentsTypes">VARCHAR,INTEGER,VARCHAR,INTEGER</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -161,11 +162,11 @@
           <stringProp name="variableNames"></stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos">
           <stringProp name="dataSource">DB Pool</stringProp>
-          <stringProp name="query">CALL get_todos_for_user_id(?);</stringProp>
-          <stringProp name="queryArguments">${userId}</stringProp>
-          <stringProp name="queryArgumentsTypes">INTEGER</stringProp>
+          <stringProp name="query">CALL get_todos_for_user(?);</stringProp>
+          <stringProp name="queryArguments">${username}</stringProp>
+          <stringProp name="queryArgumentsTypes">VARCHAR</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -184,11 +185,11 @@ assert vars.get(&quot;todo_id_1&quot;) == &quot;1&quot;;</stringProp>
           </JSR223Assertion>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Update Todo" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Update Todo">
           <stringProp name="dataSource">DB Pool</stringProp>
-          <stringProp name="query">CALL update_todo_for_user_id(?, ?, ?, ?, ?);</stringProp>
-          <stringProp name="queryArguments">${userId},${todoId},${updatedTodoText},${updatedTodoCompleted},${updatedTodoCompletedTimestamp}</stringProp>
-          <stringProp name="queryArgumentsTypes">INTEGER,INTEGER,VARCHAR,INTEGER,INTEGER</stringProp>
+          <stringProp name="query">CALL update_todo_for_user(?, ?, ?, ?, ?);</stringProp>
+          <stringProp name="queryArguments">${username},${todoId},${updatedTodoText},${updatedTodoCompleted},${updatedTodoCompletedTimestamp}</stringProp>
+          <stringProp name="queryArgumentsTypes">VARCHAR,INTEGER,VARCHAR,INTEGER,INTEGER</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -209,11 +210,11 @@ vars.put(&quot;updatedTodoCompletedTimestamp&quot;, 2147483647 as String); // Tu
           </JSR223PreProcessor>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos">
           <stringProp name="dataSource">DB Pool</stringProp>
-          <stringProp name="query">CALL get_todos_for_user_id(?);</stringProp>
-          <stringProp name="queryArguments">${userId}</stringProp>
-          <stringProp name="queryArgumentsTypes">INTEGER</stringProp>
+          <stringProp name="query">CALL get_todos_for_user(?);</stringProp>
+          <stringProp name="queryArguments">${username}</stringProp>
+          <stringProp name="queryArgumentsTypes">VARCHAR</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -234,11 +235,11 @@ assert vars.get(&quot;completed_timestamp_1&quot;) == vars.get(&quot;updatedTodo
           </JSR223Assertion>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Delete Todo" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Delete Todo">
           <stringProp name="dataSource">DB Pool</stringProp>
-          <stringProp name="query">CALL delete_todo_for_user_id(?, ?);</stringProp>
-          <stringProp name="queryArguments">${userId},${todoId}</stringProp>
-          <stringProp name="queryArgumentsTypes">INTEGER,INTEGER</stringProp>
+          <stringProp name="query">CALL delete_todo_for_user(?, ?);</stringProp>
+          <stringProp name="queryArguments">${username},${todoId}</stringProp>
+          <stringProp name="queryArgumentsTypes">VARCHAR,INTEGER</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -247,11 +248,11 @@ assert vars.get(&quot;completed_timestamp_1&quot;) == vars.get(&quot;updatedTodo
           <stringProp name="variableNames"></stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Get Todos">
           <stringProp name="dataSource">DB Pool</stringProp>
-          <stringProp name="query">CALL get_todos_for_user_id(?);</stringProp>
-          <stringProp name="queryArguments">${userId}</stringProp>
-          <stringProp name="queryArgumentsTypes">INTEGER</stringProp>
+          <stringProp name="query">CALL get_todos_for_user(?);</stringProp>
+          <stringProp name="queryArguments">${username}</stringProp>
+          <stringProp name="queryArgumentsTypes">VARCHAR</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Callable Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>

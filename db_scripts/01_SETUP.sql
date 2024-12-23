@@ -19,13 +19,14 @@ USE `db_todo` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_todo`.`tbl_todo` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NOT NULL,
+  `username` VARCHAR(64) NOT NULL,
   `todo_id` INT UNSIGNED NOT NULL,
   `data` VARCHAR(100) NULL,
   `completed` TINYINT NULL,
   `completed_timestamp` INT UNSIGNED NULL,
-  PRIMARY KEY (`id`, `user_id`),
-  UNIQUE INDEX `idtable1_UNIQUE` (`id` ASC) VISIBLE)
+  PRIMARY KEY (`id`, `username`),
+  UNIQUE INDEX `idtable1_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX `tbl_user_id_UNIQUE` (`username` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
